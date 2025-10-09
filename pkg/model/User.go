@@ -24,33 +24,39 @@ type User struct {
 
 // 新建用户
 func NewUser(username, ipAddress string, port int) *User {
-	return &User {username, ipAddress, port}
+	return &User{
+		username:  username,
+		ipAddress: ipAddress,
+		port:      port,
+	}
+	// return &User{username, ipAddress, port} 为位置参数，适用于不需要初始化的情况下的简短写法
+	// 这里统一为命名参数写法
 }
 
-func (user *User) GetUsername() string {
-	return user.username
+func (u *User) GetUsername() string {
+	return u.username
 }
 
-func (user *User) SetUsername(username string) string {
-	user.username = username
+func (u *User) SetUsername(username string) {
+	u.username = username
 }
 
-func (user *User) GetIpAddress() string {
-    return user.ipAddress
+func (u *User) GetIpAddress() string {
+    return u.ipAddress
 }
 
-func (user *User) SetIpAddress(ipAddress string) {
-    user.ipAddress = ipAddress
+func (u *User) SetIpAddress(ipAddress string) {
+    u.ipAddress = ipAddress
 }
 
-func (user *User) GetPort() int {
-    return user.port
+func (u *User) GetPort() int {
+    return u.port
 }
 
-func (user *User) SetPort(port int) {
-    user.port = port
+func (u *User) SetPort(port int) {
+    u.port = port
 }
 
-func (user *User) String() string {
-    return fmt.Sprintf("User{username='%s', ipAddress='%s', port=%d}", user.username, user.ipAddress, user.port)
+func (u *User) String() string {
+    return fmt.Sprintf("User{username='%s', ipAddress='%s', port=%d}", u.username, u.ipAddress, u.port)
 }
