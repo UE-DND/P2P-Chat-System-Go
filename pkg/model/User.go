@@ -5,12 +5,7 @@ import "fmt"
 
 // 在之前的编译器项目中，通过 C 结构体来模拟实现面向对象。Go 和 C 差不多，这里也用结构体实现。
 
-/**
- * 用户类，表示聊天用户
- *
- * @version 1.0.0
- * @since 2025-10-08
- */
+// 用户类，表示聊天用户
 type User struct {
 	// 用户名
 	username string

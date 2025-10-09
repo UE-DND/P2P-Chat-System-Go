@@ -1,14 +1,9 @@
 // src\main\java\com\uednd\p2pchat\model\FileInfo.java equivalent
 package model
 
-/**
- * 文件信息类
- * <p>
- * 表示文件传输信息
- *
- * @version 1.0.0
- * @since 2025-10-09
- */
+import "fmt"
+
+// 文件信息类
 type FileInfo struct {
 	// 文件名
 	fileName string

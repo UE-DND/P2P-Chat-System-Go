@@ -3,12 +3,7 @@ package model
 
 import "fmt"
 
-/**
- * 消息类，表示聊天消息
- *
- * @version 1.0.0
- * @since 2025-10-09
- */
+// 消息类，表示聊天消息
 type Message struct {
 	// 发送者
 	sender string
@@ -53,53 +48,53 @@ func NewFileMessage(sender, receiver, content, filePath string) *Message {
 	}
 }
 
-func (m *Message) GetSender() string {
-	return m.sender
+func (msg *Message) GetSender() string {
+	return msg.sender
 }
 
-func (m *Message) GetReceiver() string {
-	return m.receiver
+func (msg *Message) GetReceiver() string {
+	return msg.receiver
 }
 
-func (m *Message) GetContent() string {
-	return m.content
+func (msg *Message) GetContent() string {
+	return msg.content
 }
 
-func (m *Message) GetType() string {
-	return m.msgType
+func (msg *Message) GetType() string {
+	return msg.msgType
 }
 
-func (m *Message) GetFilePath() string {
-	return m.filePath
+func (msg *Message) GetFilePath() string {
+	return msg.filePath
 }
 
-func (m *Message) SetSender(sender string) {
-	m.sender = sender
+func (msg *Message) SetSender(sender string) {
+	msg.sender = sender
 }
 
-func (m *Message) SetReceiver(receiver string) {
-	m.receiver = receiver
+func (msg *Message) SetReceiver(receiver string) {
+	msg.receiver = receiver
 }
 
-func (m *Message) SetContent(content string) {
-	m.content = content
+func (msg *Message) SetContent(content string) {
+	msg.content = content
 }
 
-func (m *Message) SetType(msgType string) {
-	m.msgType = msgType
+func (msg *Message) SetType(msgType string) {
+	msg.msgType = msgType
 }
 
-func (m *Message) SetFilePath(filePath string) {
-	m.filePath = filePath
+func (msg *Message) SetFilePath(filePath string) {
+	msg.filePath = filePath
 }
 
-func (m *Message) String() string {
-	switch m.msgType {
+func (msg *Message) String() string {
+	switch msg.msgType {
 	case "FILE":
-		return fmt.Sprintf("%s: [文件] %s", m.sender, m.content)
+		return fmt.Sprintf("%s: [文件] %s", msg.sender, msg.content)
 	case "SYSTEM":
-		return fmt.Sprintf("[系统消息] %s", m.content)
+		return fmt.Sprintf("[系统消息] %s", msg.content)
 	default:
-		return fmt.Sprintf("%s: %s", m.sender, m.content)
+		return fmt.Sprintf("%s: %s", msg.sender, msg.content)
 	}
 }
