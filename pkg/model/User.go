@@ -37,21 +37,21 @@ func (u *User) SetUsername(username string) {
 }
 
 func (u *User) GetIpAddress() string {
-    return u.ipAddress
+	return u.ipAddress
 }
 
 func (u *User) SetIpAddress(ipAddress string) {
-    u.ipAddress = ipAddress
+	u.ipAddress = ipAddress
 }
 
 func (u *User) GetPort() int {
-    return u.port
+	return u.port
 }
 
 func (u *User) SetPort(port int) {
-    u.port = port
+	u.port = port
 }
 
 func (u *User) String() string {
-    return fmt.Sprintf("User{username='%s', ipAddress='%s', port=%d}", u.username, u.ipAddress, u.port)
+	return fmt.Sprintf("User{username='%s', ipAddress='%s', port=%d}", u.username, u.ipAddress, u.port)
 }

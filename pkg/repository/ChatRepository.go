@@ -3,15 +3,16 @@ package repository
 
 import (
 	"database/sql"
-	_ "github.com/mattn/go-sqlite3"
-	"github.com/UE-DND/P2P-Chat-System-Go/pkg/model"
 	"fmt"
+
+	"github.com/UE-DND/P2P-Chat-System-Go/pkg/model"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 // 数据库管理类，负责处理SQLite数据库操作
 type ChatRepository struct {
 	sql_path string  // 数据库文件夹路径
-	db 		 *sql.DB // 数据库连接
+	db       *sql.DB // 数据库连接
 }
 
 func NewChatRepository(sql_path string) *ChatRepository {
@@ -26,7 +27,7 @@ func (cr *ChatRepository) InitDatabase() error {
 	if err != nil {
 		return fmt.Errorf("failed to open database: %v", err)
 	}
-	cr.db = db  // 保存该连接
+	cr.db = db // 保存该连接
 
 	// 更新数据库：创建用户表
 	createUsersTable := `
@@ -40,8 +41,8 @@ func (cr *ChatRepository) InitDatabase() error {
 		return fmt.Errorf("failed to create users table: %v", err)
 	}
 
-    // 更新数据库：创建消息记录表
-    createMessagesTable := `
+	// 更新数据库：创建消息记录表
+	createMessagesTable := `
         CREATE TABLE IF NOT EXISTS messages (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             sender TEXT NOT NULL,
@@ -59,7 +60,7 @@ func (cr *ChatRepository) InitDatabase() error {
 
 // 保存用户信息
 func (cr *ChatRepository) SaveUser(u *model.User) error {
-	var userID int  // 作检查用，实际无作用
+	var userID int // 作检查用，实际无作用
 	query := "SELECT id FROM users WHERE username = ?"
 	err := cr.db.QueryRow(query, u.GetUsername()).Scan(&userID)
 
@@ -100,18 +101,18 @@ func (cr *ChatRepository) SaveMessage(msg *model.Message) error {
 	`
 
 	// 这里使用占位符，修复源代码中可能存在的SQL注入问题
-    _, err := cr.db.Exec(insertQuery,
-        msg.GetSender(),
-        msg.GetReceiver(),
-        msg.GetContent(),
-        msg.GetType(),
-        msg.GetFilePath())
+	_, err := cr.db.Exec(insertQuery,
+		msg.GetSender(),
+		msg.GetReceiver(),
+		msg.GetContent(),
+		msg.GetType(),
+		msg.GetFilePath())
 
-    if err != nil {
-        return fmt.Errorf("failed to save message: %w", err)
-    }
+	if err != nil {
+		return fmt.Errorf("failed to save message: %w", err)
+	}
 
-    return nil
+	return nil
 }
 
 // 获取与特定用户的聊天记录
@@ -129,7 +130,7 @@ func (cr *ChatRepository) GetChatHistory(user1, user2 string) ([]*model.Message,
 		return nil, fmt.Errorf("failed to query chat history: %v", err)
 	}
 
-	defer result.Close()  // defer：无论函数如何退出，都会执行
+	defer result.Close() // defer：无论函数如何退出，都会执行
 
 	var messages []*model.Message
 	for result.Next() {
