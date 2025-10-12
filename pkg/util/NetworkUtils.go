@@ -11,23 +11,23 @@ import (
 type PortStatus int
 
 const (
-	AVAILABLE 	   PortStatus = 1
-	IN_USE    	   PortStatus = 2
-	INVALID_RANGE  PortStatus = 3
+	AVAILABLE     PortStatus = 1
+	IN_USE        PortStatus = 2
+	INVALID_RANGE PortStatus = 3
 )
 
 // 获取端口状态
 func (ps PortStatus) String() string {
-    switch ps {
-    case AVAILABLE:
-        return "AVAILABLE"
-    case IN_USE:
-        return "IN_USE"
-    case INVALID_RANGE:
-        return "INVALID_RANGE"
-    default:
-        return fmt.Sprintf("UNKNOWN-STATUS: %d", int(ps))
-    }
+	switch ps {
+	case AVAILABLE:
+		return "AVAILABLE"
+	case IN_USE:
+		return "IN_USE"
+	case INVALID_RANGE:
+		return "INVALID_RANGE"
+	default:
+		return fmt.Sprintf("UNKNOWN-STATUS: %d", int(ps))
+	}
 }
 
 // 获取主机名
@@ -52,7 +52,7 @@ func GetLocalIpAddress() string {
 	// go不允许声明了但未使用的变量
 	for _, iface := range interfaces {
 		// 如果是环回接口和未启用的接口，跳过
-		if iface.Flags & net.FlagLoopback != 0 || iface.Flags & net.FlagUp == 0 {
+		if iface.Flags&net.FlagLoopback != 0 || iface.Flags&net.FlagUp == 0 {
 			continue
 		}
 
@@ -67,7 +67,7 @@ func GetLocalIpAddress() string {
 			// 类型断言
 			// if 变量名, 布尔值 := 接口变量.(具体类型); 布尔值
 			// 如果类型断言成功，布尔值为true，执行if块内语句
-			if ipnet, success := address.(*net.IPNet) ; success {
+			if ipnet, success := address.(*net.IPNet); success {
 				// 如果是IPv4且不为环回，返回地址
 				if ipnet.IP.To4() != nil && !ipnet.IP.IsLoopback() {
 					return ipnet.IP.String()
